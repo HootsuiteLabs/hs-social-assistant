@@ -72,6 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gettingstarted.wsgi.application'
 
+X_FRAME_OPTIONS¶ = 'DENY'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -135,4 +136,3 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-

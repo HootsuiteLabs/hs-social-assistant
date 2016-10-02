@@ -72,8 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gettingstarted.wsgi.application'
 
-X_FRAME_OPTIONS = 'DENY'
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 

@@ -6,7 +6,9 @@ from .models import Greeting
 # Create your views here.
 def index(request):
     # return HttpResponse('Hello from Python!')
-    return render(request, 'index.html')
+    response = render(request, 'index.html')
+    response['X-Frame-Options'] = "EXEMPT"
+    return response
 
 
 def db(request):

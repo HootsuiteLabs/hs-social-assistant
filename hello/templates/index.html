@@ -84,6 +84,10 @@
         }
       }
       console.log(final_transcript);
+      recognition.stop();
+      if (final_transcript == 'feed me content') {
+        speak('OK. I will look for some content for you, master.');
+      }
     }
     recognition.onerror = function(event) {
       console.log('error during speech recognition!');
@@ -106,14 +110,12 @@
       recognition.start();
     }
   }
-  var speak = function () {
+  var speak = function (message) {
     if (voiceMessage) {
-      voiceMessage.text = 'Hello Kelly'
+      voiceMessage.text = msg
       window.speechSynthesis.speak(voiceMessage);
     }
   }
-
-  speak();
 
   </script>
 </div>

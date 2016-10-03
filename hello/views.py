@@ -1,4 +1,5 @@
 import json
+import requests
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -11,11 +12,14 @@ def index(request):
     return render(request, 'index.html')
 
 def get_articles(request):
+
+    url = "https://aras.hootsuite.com/articles"
+    querystring = {"q":"Advocacy,Social"}
+    aras_response = requests.request("GET", url, params=querystring)
+
+    # build the result
     response = {}
-    response['result'] = {
-        'field1': 'some data',
-        'field2': 'more data'
-    }
+    response['result'] = aras_response
     response['message'] = ''
     return HttpResponse(json.dumps(response), content_type="application/json");
 

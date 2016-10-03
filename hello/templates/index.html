@@ -85,8 +85,11 @@
       }
       console.log(final_transcript);
       recognition.stop();
-      if (final_transcript === 'feed me content') {
+      if (final_transcript === 'content') {
         speak('OK. I will look for some content for you, master');
+        $.getJSON( "articles/", function( data ) {
+          console.log(data);
+        });
       } else {
         speak('Sorry master. I do not understand what you are saying');
       }
@@ -120,7 +123,7 @@
   }
 
   speak('hello master. what can i do for you?');
-  
+
   </script>
 </div>
 {% endblock %}

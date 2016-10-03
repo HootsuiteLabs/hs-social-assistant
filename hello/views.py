@@ -15,14 +15,19 @@ def get_articles(request):
 
     url = "https://aras.hootsuite.com/articles"
     querystring = {"q":"Advocacy,Social"}
-    aras_response = requests.request("GET", url, params=querystring)
 
-    # build the result
-    response = {}
-    response['result'] = aras_response.json()
-    response['message'] = ''
-    return HttpResponse(json.dumps(response), content_type="application/json");
-
+    try:
+        aras_response = requests.request("GET", url, params=querystring)
+        response = {}
+        response['result'] = aras_response.json()
+        response['message'] = ''
+        return HttpResponse(json.dumps(response), content_type="application/json");
+    except:
+        aras_response = requests.request("GET", url, params=querystring)
+        response = {}
+        response['result'] = aras_response.json()
+        response['message'] = ''
+        return HttpResponse(json.dumps(response), content_type="application/json");
 
 # def db(request):
 #

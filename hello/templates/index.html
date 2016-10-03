@@ -35,7 +35,7 @@
   	</div>
 
   	<div class="blackbar">
-  		<div class="butt">
+  		<div class="butt" onclick="listen()">
   		</div>
   	</div>
 
@@ -108,7 +108,7 @@
   }
   var speak = function () {
     if (voiceMessage) {
-      voiceMessage.text = 'Hello World'
+      voiceMessage.text = 'Hello Kelly'
       window.speechSynthesis.speak(voiceMessage);
     }
   }

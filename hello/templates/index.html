@@ -6,7 +6,7 @@
 <div>
   	<div class="cardholder">
   		<div class="card">
-  			<div class="pic">
+  			<div class="pic1">
 
   			</div>
   			<div class="message" id="msg1">
@@ -23,14 +23,14 @@
   		</div>
 
   		<div class="card">
-        <div class="pic">
+        <div class="pic2">
   			</div>
   			<div class="message" id="msg2">
   			</div>
   		</div>
 
   		<div class="card">
-        <div class="pic">
+        <div class="pic3">
 
   			</div>
 
@@ -118,9 +118,23 @@
                 $("#pic3").html("<img src='" + data.result.articles[2].image + "'>")
                 speak('Here you go, master');
               } else {
-                console.log('no data. possibly an error!');
-                console.log(data);
-                speak('I am afraid something went wrong, master. Please try again');
+                console.log('error. retrying again!');
+                $.getJSON( "articles/", function( data ) {
+                  if (data.result.articles) {
+                    console.log(data);
+                    $("#msg1").text(data.result.articles[0].title);
+                    $("#msg2").text(data.result.articles[1].title);
+                    $("#msg3").text(data.result.articles[2].title);
+                    $("#pic1").html("<img src='" + data.result.articles[0].image + "'>")
+                    $("#pic2").html("<img src='" + data.result.articles[1].image + "'>")
+                    $("#pic3").html("<img src='" + data.result.articles[2].image + "'>")
+                    speak('Here you go, master');
+                  } else {
+                    console.log('no data. possibly an error!');
+                    console.log(data);
+                    speak('I am afraid something went wrong, master. Please try again');
+                  }
+                });
               }
             });
           }

@@ -36,6 +36,10 @@
   		</div>
 
   		<div class="card">
+        <div class="pic" id="pic4">
+  			</div>
+  			<div class="message" id="msg4">
+  			</div>
   		</div>
   	</div>
 
@@ -98,9 +102,10 @@
             $("#msg1").text(data.result.articles[0].title);
             $("#msg2").text(data.result.articles[1].title);
             $("#msg3").text(data.result.articles[2].title);
-            $("#pic1").html("<img src='" + data.result.articles[0].image + "'>")
-            $("#pic2").html("<img src='" + data.result.articles[1].image + "'>")
-            $("#pic3").html("<img src='" + data.result.articles[2].image + "'>")
+            $("#pic1").html("<img height='100%' width='100%' src='" + data.result.articles[0].image + "'>")
+            $("#pic2").html("<img height='100%' width='100%' src='" + data.result.articles[1].image + "'>")
+            $("#pic3").html("<img height='100%' width='100%' src='" + data.result.articles[2].image + "'>")
+            $("#pic4").html("<img height='100%' width='100%' src='" + data.result.articles[3].image + "'>")
             speak('Here you go, master');
           } else {
             console.log('error. retrying!');
@@ -110,9 +115,10 @@
                 $("#msg1").text(data.result.articles[0].title);
                 $("#msg2").text(data.result.articles[1].title);
                 $("#msg3").text(data.result.articles[2].title);
-                $("#pic1").html("<img src='" + data.result.articles[0].image + "'>")
-                $("#pic2").html("<img src='" + data.result.articles[1].image + "'>")
-                $("#pic3").html("<img src='" + data.result.articles[2].image + "'>")
+                $("#pic1").html("<img height='100%' width='100%' src='" + data.result.articles[0].image + "'>")
+                $("#pic2").html("<img height='100%' width='100%' src='" + data.result.articles[1].image + "'>")
+                $("#pic3").html("<img height='100%' width='100%' src='" + data.result.articles[2].image + "'>")
+                $("#pic4").html("<img height='100%' width='100%' src='" + data.result.articles[3].image + "'>")
                 speak('Here you go, master');
               } else {
                 console.log('error. retrying again!');
@@ -122,9 +128,10 @@
                     $("#msg1").text(data.result.articles[0].title);
                     $("#msg2").text(data.result.articles[1].title);
                     $("#msg3").text(data.result.articles[2].title);
-                    $("#pic1").html("<img src='" + data.result.articles[0].image + "'>")
-                    $("#pic2").html("<img src='" + data.result.articles[1].image + "'>")
-                    $("#pic3").html("<img src='" + data.result.articles[2].image + "'>")
+                    $("#pic1").html("<img height='100%' width='100%' src='" + data.result.articles[0].image + "'>")
+                    $("#pic2").html("<img height='100%' width='100%' src='" + data.result.articles[1].image + "'>")
+                    $("#pic3").html("<img height='100%' width='100%' src='" + data.result.articles[2].image + "'>")
+                    $("#pic4").html("<img height='100%' width='100%' src='" + data.result.articles[3].image + "'>")
                     speak('Here you go, master');
                   } else {
                     console.log('no data. possibly an error!');

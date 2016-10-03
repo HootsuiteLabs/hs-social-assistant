@@ -7,11 +7,8 @@
   	<div class="cardholder">
   		<div class="card">
   			<div class="pic">
-
   			</div>
-
-  			<div class="message">
-  			Hello my baby, hello my honey, hello my ragtime gal. Champs of the hackathon.
+  			<div class="message" id="msg1">
   			</div>
 
   			<div class="footer">
@@ -25,9 +22,19 @@
   		</div>
 
   		<div class="card">
+        <div class="pic">
+  			</div>
+  			<div class="message" id="msg2">
+  			</div>
   		</div>
 
   		<div class="card">
+        <div class="pic">
+
+  			</div>
+
+  			<div class="message" id="msg3">
+  			</div>
   		</div>
 
   		<div class="card">
@@ -88,7 +95,28 @@
       if (final_transcript === 'content') {
         speak('OK. I will look for some content for you, master');
         $.getJSON( "articles/", function( data ) {
-          console.log(data);
+          if (data.result.articles) {
+            console.log(data);
+            $("#msg1").text(data.result.articles[0].title);
+            $("#msg2").text(data.result.articles[1].title);
+            $("#msg3").text(data.result.articles[2].title);
+            speak('Here you go, master');
+          } else {
+            console.log('error. retrying!');
+            $.getJSON( "articles/", function( data ) {
+              if (data.result.articles) {
+                console.log(data);
+                $("#msg1").text(data.result.articles[0].title);
+                $("#msg2").text(data.result.articles[1].title);
+                $("#msg3").text(data.result.articles[2].title);
+                speak('Here you go, master');
+              } else {
+                console.log('no data. possibly an error!');
+                console.log(data);
+                speak('I am afraid something went wrong, master. Please try again');
+              }
+            });
+          }
         });
       } else {
         speak('Sorry master. I do not understand what you are saying');

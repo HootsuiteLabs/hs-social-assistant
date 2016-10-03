@@ -85,8 +85,10 @@
       }
       console.log(final_transcript);
       recognition.stop();
-      if (final_transcript == 'feed me content') {
-        speak('OK. I will look for some content for you, master.');
+      if (final_transcript === 'feed me content') {
+        speak('OK. I will look for some content for you, master');
+      } else {
+        speak('Sorry master. I do not understand what you are saying');
       }
     }
     recognition.onerror = function(event) {

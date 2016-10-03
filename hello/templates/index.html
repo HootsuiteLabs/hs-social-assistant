@@ -7,6 +7,7 @@
   	<div class="cardholder">
   		<div class="card">
   			<div class="pic">
+
   			</div>
   			<div class="message" id="msg1">
   			</div>
@@ -100,6 +101,9 @@
             $("#msg1").text(data.result.articles[0].title);
             $("#msg2").text(data.result.articles[1].title);
             $("#msg3").text(data.result.articles[2].title);
+            $("#pic1").html("<img src='" + data.result.articles[0].image + "'>")
+            $("#pic2").html("<img src='" + data.result.articles[1].image + "'>")
+            $("#pic3").html("<img src='" + data.result.articles[2].image + "'>")
             speak('Here you go, master');
           } else {
             console.log('error. retrying!');
@@ -109,6 +113,9 @@
                 $("#msg1").text(data.result.articles[0].title);
                 $("#msg2").text(data.result.articles[1].title);
                 $("#msg3").text(data.result.articles[2].title);
+                $("#pic1").html("<img src='" + data.result.articles[0].image + "'>")
+                $("#pic2").html("<img src='" + data.result.articles[1].image + "'>")
+                $("#pic3").html("<img src='" + data.result.articles[2].image + "'>")
                 speak('Here you go, master');
               } else {
                 console.log('no data. possibly an error!');

@@ -11,13 +11,14 @@
     } else {
       var recognition = new webkitSpeechRecognition();
       recognition.continuous = true;
-      recognition.interimResults = true;
+      recognition.interimResults = false;
 
       recognition.onstart = function() {
         console.log('started recognition');
       }
       recognition.onresult = function(event) {
         console.log('speech has been captured');
+        console.log(event);
         var final_transcript = '';
 
         for (var i = event.resultIndex; i < event.results.length; ++i) {

@@ -19,7 +19,7 @@ def get_articles(request):
 
     # build the result
     response = {}
-    response['result'] = aras_response
+    response['result'] = aras_response.json()
     response['message'] = ''
     return HttpResponse(json.dumps(response), content_type="application/json");
 

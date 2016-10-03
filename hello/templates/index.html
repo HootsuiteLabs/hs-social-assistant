@@ -112,7 +112,7 @@
       recognition.start();
     }
   }
-  var speak = function (message) {
+  var speak = function (msg) {
     if (voiceMessage) {
       voiceMessage.text = msg
       window.speechSynthesis.speak(voiceMessage);

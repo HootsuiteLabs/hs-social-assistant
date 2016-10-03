@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -9,7 +11,13 @@ def index(request):
     return render(request, 'index.html')
 
 def get_articles(request):
-    return HttpResponse('Hello World');
+    response = {}
+    response['result'] = {
+        'field1': 'some data',
+        'field2': 'more data'
+    }
+    response['message'] = ''
+    return HttpResponse(json.dumps(response), content_type="application/json");
 
 
 # def db(request):

@@ -4,7 +4,7 @@
 {% block content %}
 
 <div>
-  Hello Rei and Kelly!! You guys are just so cool! and handsome!
+  Talk to me baby!!
   <script type="text/javascript">
     if (!('webkitSpeechRecognition' in window)) {
       console.log('NO SUPPORT FOR SPEECH!');
@@ -18,6 +18,14 @@
       }
       recognition.onresult = function(event) {
         console.log('speech has been captured');
+        var final_transcript = '';
+
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            final_transcript += event.results[i][0].transcript;
+          }
+        }
+        console.log(final_transcript);
       }
       recognition.onerror = function(event) {
         console.log('error during speech recognition!');

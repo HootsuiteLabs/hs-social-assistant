@@ -4,6 +4,27 @@
 {% block content %}
 
 <div>
-  Hello Rei and Kelly!! You guys are just so cool!
+  Hello Rei and Kelly!! You guys are just so cool! and handsome!
+  <script type="text/javascript">
+    if (!('webkitSpeechRecognition' in window)) {
+      console.log('NO SUPPORT FOR SPEECH!');
+    } else {
+      var recognition = new webkitSpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onstart = function() {
+        console.log('started recognition');
+      }
+      recognition.onresult = function(event) {
+        console.log('speech has been captured');
+      }
+      recognition.onerror = function(event) {
+        console.log('error during speech recognition!');
+      }
+      recognition.onend = function() {
+        console.log('finished speech recognition');
+      }
+  </script>
 </div>
 {% endblock %}

@@ -6,36 +6,62 @@
 <div>
   Talk to me baby!!
   <script type="text/javascript">
-    if (!('webkitSpeechRecognition' in window)) {
-      console.log('NO SUPPORT FOR SPEECH!');
-    } else {
-      var recognition = new webkitSpeechRecognition();
-      recognition.continuous = true;
-      recognition.interimResults = false;
+  // set up global vars
+  var recognition, voiceMessage;
 
-      recognition.onstart = function() {
-        console.log('started recognition');
-      }
-      recognition.onresult = function(event) {
-        console.log('speech has been captured');
-        console.log(event);
-        var final_transcript = '';
+  // set up speech recognition
+  if (!('webkitSpeechRecognition' in window)) {
+    console.log('NO SUPPORT FOR SPEECH!');
+  } else {
+    recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
 
-        for (var i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            final_transcript += event.results[i][0].transcript;
-          }
+    recognition.onstart = function() {
+      console.log('started recognition');
+    }
+    recognition.onresult = function(event) {
+      console.log('speech has been captured');
+      console.log(event);
+      var final_transcript = '';
+
+      for (var i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          final_transcript += event.results[i][0].transcript;
         }
-        console.log(final_transcript);
       }
-      recognition.onerror = function(event) {
-        console.log('error during speech recognition!');
-      }
-      recognition.onend = function() {
-        console.log('finished speech recognition');
-      }
+      console.log(final_transcript);
+    }
+    recognition.onerror = function(event) {
+      console.log('error during speech recognition!');
+    }
+    recognition.onend = function() {
+      console.log('finished speech recognition');
+    }
+  }
+
+  // set up speech speechSynthesis
+  if (!('SpeechSynthesisUtterance' in window)) {
+    console.log('NO SUPPORT FOR SPEECH SYNTH!');
+  } else {
+    voiceMessage = new SpeechSynthesisUtterance();
+  }
+
+  // listen and speak functions
+  var listen = function () {
+    if (recognition) {
       recognition.start();
     }
+  }
+  var speak = function () {
+    if (voiceMessage) {
+      voiceMessage.text = 'Hello World'
+      window.speechSynthesis.speak(voiceMessage);
+    }
+  }
+
+  listen();
+
   </script>
 </div>
 {% endblock %}

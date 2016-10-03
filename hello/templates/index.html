@@ -4,8 +4,61 @@
 {% block content %}
 
 <div>
-  Talk to me baby!!
+  	<div class="cardholder">
+  		<div class="card">
+  			<div class="pic">
+
+  			</div>
+
+  			<div class="message">
+  			Hello my baby, hello my honey, hello my ragtime gal. Champs of the hackathon.
+  			</div>
+
+  			<div class="footer">
+  				<div class="site">
+  				gizmodo.com
+  				</div>
+  				<div class="date">
+  				Oct 3
+  				</div>
+  			</div>
+  		</div>
+
+  		<div class="card">
+  		</div>
+
+  		<div class="card">
+  		</div>
+
+  		<div class="card">
+  		</div>
+  	</div>
+
+  	<div class="blackbar">
+  		<div class="butt">
+  		</div>
+  	</div>
+
+  	<div class="owllisten">
+  	bonjour
+  	</div>
+
   <script type="text/javascript">
+  // JQuery stuff
+  $(document).ready(function(){
+
+      $(".card").click(function(){
+          $(".card").stop(true, false).animate({ left: "-=375px", } );
+      });
+
+      $(".butt").click(function(){
+          $(".owllisten").toggleClass("popup");
+      });
+
+
+
+  });
+
   // set up global vars
   var recognition, voiceMessage;
 

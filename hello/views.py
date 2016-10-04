@@ -8,6 +8,16 @@ from django.http import HttpResponse
 def index(request):
     return render(request, 'index.html')
 
+def get_topics_for_tweet(text):
+    url = "https://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy"
+    querystring = {
+        "apikey":"3f2b08f9bf2c5f59a2d7b2d61dd95890a80fb2b6",
+        "text":text,
+        "outputMode":"json"}
+    text_analysis = requests.request("GET", url, params=querystring)
+    topics = text_analysis.taxonomy[0].get('label', '/')[1:].split("/")
+    return topics
+
 # Content discovery API endpoint
 def get_articles(request):
     topics = request.GET.get('topics','Marketing,Social_Media')
@@ -43,14 +53,17 @@ def get_topics(request):
     messages = list()
     i = 1
     for tweet in twitter_response.json():
-        if (i > 10):
+        if (i > 2):
             break
         messages.append(tweet.get('text', ''))
         i = i +1
     print messages
+    for message in messages:
+        print 'getting topics for: ' + message
+        print get_topics_for_tweet(message)
 
     response = {}
-    response['result'] = {'topics': 'software'}
+    response['result'] = {'topics': 'cooking'}
     response['message'] = ''
     return HttpResponse(json.dumps(response),
                         content_type="application/json");

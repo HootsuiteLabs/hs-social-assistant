@@ -86,12 +86,12 @@
 
   });
 
-  // set up global vars
+  // set up main vars
   var recognition, voiceMessage;
 
   // set up speech recognition
   if (!('webkitSpeechRecognition' in window)) {
-    console.log('NO SUPPORT FOR SPEECH!');
+    console.log('NO SUPPORT FOR SPEECH RECOGNITION!');
   } else {
     recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
@@ -117,47 +117,23 @@
         $.getJSON( "articles/", function( data ) {
           if (data.result.articles) {
             console.log(data);
-            $("#msg1").text(data.result.articles[0].title);
-            $("#msg2").text(data.result.articles[1].title);
-            $("#msg3").text(data.result.articles[2].title);
-            $("#msg4").text(data.result.articles[3].title);
-            $("#pic1").html("<img height='100%' width='100%' src='" + data.result.articles[0].image + "'>")
-            $("#pic2").html("<img height='100%' width='100%' src='" + data.result.articles[1].image + "'>")
-            $("#pic3").html("<img height='100%' width='100%' src='" + data.result.articles[2].image + "'>")
-            $("#pic4").html("<img height='100%' width='100%' src='" + data.result.articles[3].image + "'>")
-            speak('Here you go, master');
+            updateCards(data.result.articles);
           } else {
             console.log('error. retrying!');
             $.getJSON( "articles/", function( data ) {
               if (data.result.articles) {
                 console.log(data);
-                $("#msg1").text(data.result.articles[0].title);
-                $("#msg2").text(data.result.articles[1].title);
-                $("#msg3").text(data.result.articles[2].title);
-                $("#msg4").text(data.result.articles[3].title);
-                $("#pic1").html("<img height='100%' width='100%' src='" + data.result.articles[0].image + "'>")
-                $("#pic2").html("<img height='100%' width='100%' src='" + data.result.articles[1].image + "'>")
-                $("#pic3").html("<img height='100%' width='100%' src='" + data.result.articles[2].image + "'>")
-                $("#pic4").html("<img height='100%' width='100%' src='" + data.result.articles[3].image + "'>")
-                speak('Here you go, master');
+                updateCards(data.result.articles);
               } else {
                 console.log('error. retrying again!');
                 $.getJSON( "articles/", function( data ) {
                   if (data.result.articles) {
                     console.log(data);
-                    $("#msg1").text(data.result.articles[0].title);
-                    $("#msg2").text(data.result.articles[1].title);
-                    $("#msg3").text(data.result.articles[2].title);
-                    $("#msg4").text(data.result.articles[3].title);
-                    $("#pic1").html("<img height='100%' width='100%' src='" + data.result.articles[0].image + "'>")
-                    $("#pic2").html("<img height='100%' width='100%' src='" + data.result.articles[1].image + "'>")
-                    $("#pic3").html("<img height='100%' width='100%' src='" + data.result.articles[2].image + "'>")
-                    $("#pic4").html("<img height='100%' width='100%' src='" + data.result.articles[3].image + "'>")
-                    speak('Here you go, master');
+                    updateCards(data.result.articles);
                   } else {
                     console.log('no data. possibly an error!');
                     console.log(data);
-                    speak('I am afraid something went wrong, master. Please try again');
+                    speak('I am afraid something went wrong. Please try again');
                   }
                 });
               }
@@ -165,7 +141,7 @@
           }
         });
       } else {
-        speak('Sorry master. I do not understand what you are saying');
+        speak('Sorry, I do not understand what you are saying');
       }
     }
     recognition.onerror = function(event) {
@@ -196,7 +172,20 @@
     }
   }
 
-  speak('hello master. what can i do for you?');
+  // helper functions
+  var updateCards = function(articles) {
+    $("#msg1").text(articles[0].title);
+    $("#msg2").text(articles[1].title);
+    $("#msg3").text(articles[2].title);
+    $("#msg4").text(articles[3].title);
+    $("#pic1").html("<img height='100%' width='100%' src='" + articles[0].image + "'>")
+    $("#pic2").html("<img height='100%' width='100%' src='" + articles[1].image + "'>")
+    $("#pic3").html("<img height='100%' width='100%' src='" + articles[2].image + "'>")
+    $("#pic4").html("<img height='100%' width='100%' src='" + articles[3].image + "'>")
+    speak('Here you go');
+  }
+
+  speak('hello amigo. what can i do for you?');
 
   </script>
 </div>

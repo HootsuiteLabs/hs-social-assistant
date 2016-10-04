@@ -4,7 +4,7 @@
 {% block content %}
 
 <div>
-  	<div class="cardholder">
+  	<div class="cardholder" style="display: none;">
   		<div class="card">
   			<div class="pic" id="pic1">
   			</div>
@@ -82,7 +82,7 @@
   });
 
   // set up main vars
-  var recognition, voiceMessage, cards = [], currentCount = 0;
+  var recognition, voiceMessage, cards = [], currentCardIndex = 0;
 
   // set up speech recognition
   if (!('webkitSpeechRecognition' in window)) {
@@ -138,8 +138,10 @@
       } else if (final_transcript === 'content') {
         nextCard();
       } else if (final_transcript === 'send to compose box') {
+        speak('OK');
         var currentCard = cards[currentCardIndex - 1];
         hsp.composeMessage(currentCard.title + " " + currentCard.url, { shortenLinks: true });
+        speak('OK. I just put the article in the compose box for you');
       } else {
         speak('Sorry, I do not understand what you are saying');
       }
@@ -183,6 +185,7 @@
     $("#pic2").html("<img height='100%' width='100%' src='" + articles[1].image + "'>")
     $("#pic3").html("<img height='100%' width='100%' src='" + articles[2].image + "'>")
     $("#pic4").html("<img height='100%' width='100%' src='" + articles[3].image + "'>")
+    $(".cardholder").show();
     speak('Here you go');
   }
   var nextCard = function() {

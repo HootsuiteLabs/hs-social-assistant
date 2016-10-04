@@ -191,6 +191,9 @@
 
   // helper functions
   var updateCards = function(articles) {
+    articles = articles.filter(function(article) {
+      return article.image !== null;
+    })
     speak('Here you go');
     cards = articles;
     $("#msg1").text(articles[0].title);

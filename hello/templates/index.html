@@ -117,19 +117,19 @@
           speak('Based on your social media posts, i can see that you are interested in: ' + topic);
           sleep(1800)
         }
-        $.getJSON( "articles/?topics=" + topic, function( data ) {
+        $.getJSON( "articles/?topics=" + topic, function(data) {
           if (data.result.articles) {
             console.log(data);
             updateCards(data.result.articles);
           } else {
             console.log('error. retrying!');
-            $.getJSON( "articles/", function( data ) {
+            $.getJSON( "articles/?topics=" + topic, function(data) {
               if (data.result.articles) {
                 console.log(data);
                 updateCards(data.result.articles);
               } else {
                 console.log('error. retrying again!');
-                $.getJSON( "articles/", function( data ) {
+                $.getJSON( "articles/?topics=" + topic, function(data) {
                   if (data.result.articles) {
                     console.log(data);
                     updateCards(data.result.articles);

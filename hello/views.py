@@ -40,7 +40,8 @@ def get_articles(request):
 # AI API endpoint
 def get_topics(request):
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-    querystring = {"screen_name":"mozhacks"}
+    # querystring = {"screen_name":"mozhacks"}
+    querystring = {"screen_name":"invoker"}
     headers = {
         'authorization': "Bearer AAAAAAAAAAAAAAAAAAAAALYVxQAAAAAArsFh33H%2BFhZWl27Tn0vmsgxXBDs%3DzMUgdB9LjfL2JyefZn2GiWkGjmhirPyvkciA4mrX6MjP8eKaPz",
         'cache-control': "no-cache",
@@ -53,7 +54,7 @@ def get_topics(request):
     messages = list()
     i = 1
     for tweet in twitter_response.json():
-        if (i > 2):
+        if (i > 5):
             break
         messages.append(tweet.get('text', ''))
         i = i +1

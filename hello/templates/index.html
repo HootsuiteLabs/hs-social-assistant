@@ -110,9 +110,13 @@
       if (final_transcript.indexOf('content') > -1) {
         speak('OK. I will find some content for you');
         sleep(1200);
-        var topic = 'Sports';
-        speak('Based on your social media posts, i can see that you are interested in: ' + topic);
-        sleep(1800)
+        var topic = 'Cooking';
+        if (final_transcript.indexOf('about') > -1) {
+          topic = final_transcript.split('about ').pop();
+        } else {
+          speak('Based on your social media posts, i can see that you are interested in: ' + topic);
+          sleep(1800)
+        }
         $.getJSON( "articles/?topics=" + topic, function( data ) {
           if (data.result.articles) {
             console.log(data);

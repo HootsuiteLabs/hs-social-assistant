@@ -4,67 +4,69 @@
 {% block content %}
 
 <div>
-  	<div class="cardholder" style="display: none;">
-  		<div class="card">
-  			<div class="pic" id="pic1">
-  			</div>
-  			<div class="message" id="msg1">
-  			</div>
-  			<div class="footer">
-  				<div class="site">
-  				</div>
-  				<div class="date">
-  				</div>
-  			</div>
-  		</div>
+    <div class="superholder">
+    	<div class="cardholder" style="display: none;">
+    		<div class="card">
+    			<div class="pic" id="pic1">
+    			</div>
+    			<div class="message" id="msg1">
+    			</div>
+    			<div class="footer">
+    				<div class="site">
+    				</div>
+    				<div class="date">
+    				</div>
+    			</div>
+    		</div>
 
-  		<div class="card">
-        <div class="pic" id="pic2">
-  			</div>
-  			<div class="message" id="msg2">
-  			</div>
-        <div class="footer">
-  				<div class="site">
-  				</div>
-  				<div class="date">
-  				</div>
-  			</div>
-  		</div>
+    		<div class="card">
+          <div class="pic" id="pic2">
+    			</div>
+    			<div class="message" id="msg2">
+    			</div>
+          <div class="footer">
+    				<div class="site">
+    				</div>
+    				<div class="date">
+    				</div>
+    			</div>
+    		</div>
 
-  		<div class="card">
-        <div class="pic" id="pic3">
-  			</div>
-  			<div class="message" id="msg3">
-  			</div>
-        <div class="footer">
-  				<div class="site">
-  				</div>
-  				<div class="date">
-  				</div>
-  			</div>
-  		</div>
+    		<div class="card">
+          <div class="pic" id="pic3">
+    			</div>
+    			<div class="message" id="msg3">
+    			</div>
+          <div class="footer">
+    				<div class="site">
+    				</div>
+    				<div class="date">
+    				</div>
+    			</div>
+    		</div>
 
-  		<div class="card">
-        <div class="pic" id="pic4">
-  			</div>
-  			<div class="message" id="msg4">
-  			</div>
-        <div class="footer">
-  				<div class="site">
-  				</div>
-  				<div class="date">
-  				</div>
-  			</div>
-  		</div>
-  	</div>
+    		<div class="card">
+          <div class="pic" id="pic4">
+    			</div>
+    			<div class="message" id="msg4">
+    			</div>
+          <div class="footer">
+    				<div class="site">
+    				</div>
+    				<div class="date">
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
 
   	<div class="blackbar">
   		<div class="butt" onclick="listen()">
+        <img src="mic.svg" height="36px">
   		</div>
   	</div>
 
   	<div class="owllisten">
-  	bonjour
   	</div>
 
   <script type="text/javascript">
@@ -73,12 +75,29 @@
 
   // JQuery stuff
   $(document).ready(function(){
+
       $(".card").click(function(){
           nextCard();
       });
-      // $(".butt").click(function(){
-      //     $(".owllisten").toggleClass("popup");
-      // });
+
+      $(".send").click(function(){
+          $(".card").stop(true, false).animate({ top: "-=400px", opacity: "0"} );
+          $(".superholder").addClass("supersuccess");
+      });
+
+
+      $(".butt").click(function(){
+          $(".owllisten").addClass("popup");
+          $("body").addClass("dark");
+      });
+
+      $(".owllisten").click(function(){
+          $(".owllisten").removeClass("popup");
+          $("body").removeClass("dark");
+      });
+
+
+
   });
 
   // set up main vars
@@ -183,7 +202,7 @@
     $(".cardholder").show();
   }
   var nextCard = function() {
-    $(".card").stop(true, false).animate({ left: "-=375px", } );
+    $(".card").stop(true, false).animate({ left: "-=387px", } );
     currentCardIndex = currentCardIndex + 1;
   }
   var sleep = function(miliseconds) {

@@ -29,7 +29,7 @@ def get_articles(request):
         aras_response = requests.request("GET", url, params=querystring)
         response['result'] = aras_response.json()
         articles = response['result']['articles']
-        response['result']['articles'] = [article for article in articles if article.image is not None]
+        response['result']['articles'] = [article for article in articles if article['image', None] is not None]
         response['message'] = ''
         return HttpResponse(json.dumps(response),
                             content_type="application/json");

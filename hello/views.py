@@ -38,7 +38,17 @@ def get_topics(request):
         }
     twitter_response = requests.request("GET", url,
                                         headers=headers, params=querystring)
-    print twitter_response.json()
+
+    # extract the last 10 tweets
+    messages = list()
+    i = 1
+    for tweet in twitter_response:
+        if (i > 10):
+            break
+        messages.append(tweet)
+        i = i +1
+    print messages
+
     response = {}
     response['result'] = {'topics': 'software'}
     response['message'] = ''

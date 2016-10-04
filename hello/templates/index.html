@@ -110,39 +110,25 @@
       if (final_transcript.indexOf('content') > -1) {
         speak('OK. I will find some content for you');
         sleep(1200);
-        var topic = 'Cooking';
+        var topic = '';
         if (final_transcript.indexOf('about') > -1) {
           topic = final_transcript.split('about ').pop();
+          getArticles(topic);
         } else {
-          speak('Based on your social media posts, i can see that you are interested in: ' + topic);
-          sleep(1800)
+          // learn about the user (AI) and get related content
+          $.getJSON( "topics/", function(data) {
+            if (data.result.topics) {
+              console.log(data);
+              topic = data.result.topics;
+              speak('Based on your social media posts, i can see that you are interested in: ' + topic);
+              sleep(1800);
+              getArticles(topic);
+            } else {
+              speak('sorry. i could not find any topics');
+            }
+          });
         }
-        $.getJSON( "articles/?topics=" + topic, function(data) {
-          if (data.result.articles) {
-            console.log(data);
-            updateCards(data.result.articles);
-          } else {
-            console.log('error. retrying!');
-            $.getJSON( "articles/?topics=" + topic, function(data) {
-              if (data.result.articles) {
-                console.log(data);
-                updateCards(data.result.articles);
-              } else {
-                console.log('error. retrying again!');
-                $.getJSON( "articles/?topics=" + topic, function(data) {
-                  if (data.result.articles) {
-                    console.log(data);
-                    updateCards(data.result.articles);
-                  } else {
-                    console.log('no data. possibly an error!');
-                    console.log(data);
-                    speak('I am afraid something went wrong. Please try again');
-                  }
-                });
-              }
-            });
-          }
-        });
+        getArticles(topic);
       } else if (final_transcript.indexOf('next') > -1) {
         nextCard();
       } else if (final_transcript.indexOf('box') > -1) {
@@ -204,6 +190,34 @@
   var sleep = function(miliseconds) {
      var currentTime = new Date().getTime();
      while (currentTime + miliseconds >= new Date().getTime()) {}
+  }
+  var getArticles = function(topic) {
+    $.getJSON( "articles/?topics=" + topic, function(data) {
+      if (data.result.articles) {
+        console.log(data);
+        updateCards(data.result.articles);
+      } else {
+        console.log('error. retrying!');
+        $.getJSON( "articles/?topics=" + topic, function(data) {
+          if (data.result.articles) {
+            console.log(data);
+            updateCards(data.result.articles);
+          } else {
+            console.log('error. retrying again!');
+            $.getJSON( "articles/?topics=" + topic, function(data) {
+              if (data.result.articles) {
+                console.log(data);
+                updateCards(data.result.articles);
+              } else {
+                console.log('no data. possibly an error!');
+                console.log(data);
+                speak('I am afraid something went wrong. Please try again');
+              }
+            });
+          }
+        });
+      }
+    });
   }
 
   speak('hello. what can i do for you?');

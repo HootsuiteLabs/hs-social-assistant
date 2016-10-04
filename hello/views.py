@@ -15,7 +15,7 @@ def get_topics_for_tweet(text):
         "text":text,
         "outputMode":"json"}
     text_analysis = requests.request("GET", url, params=querystring)
-    topics = text_analysis.taxonomy[0].get('label', '/')[1:].split("/")
+    topics = text_analysis.json()['taxonomy'][0].get('label', '/')[1:].split("/")
     return topics
 
 # Content discovery API endpoint

@@ -108,8 +108,12 @@
       console.log(final_transcript);
       recognition.stop();
       if (final_transcript.indexOf('content') > -1) {
-        speak('OK. I will look for some content for you');
-        $.getJSON( "articles/", function( data ) {
+        speak('OK. I will find some content for you');
+        sleep(1200);
+        var topic = 'Sports';
+        speak('Based on your social media posts, i can see that you are interested in: ' + topic);
+        sleep(1800)
+        $.getJSON( "articles/?topics=" + topic, function( data ) {
           if (data.result.articles) {
             console.log(data);
             updateCards(data.result.articles);
@@ -177,6 +181,7 @@
 
   // helper functions
   var updateCards = function(articles) {
+    speak('Here you go');
     cards = articles;
     $("#msg1").text(articles[0].title);
     $("#msg2").text(articles[1].title);
@@ -187,11 +192,14 @@
     $("#pic3").html("<img height='100%' width='100%' src='" + articles[2].image + "'>")
     $("#pic4").html("<img height='100%' width='100%' src='" + articles[3].image + "'>")
     $(".cardholder").show();
-    speak('Here you go');
   }
   var nextCard = function() {
     $(".card").stop(true, false).animate({ left: "-=375px", } );
     currentCardIndex = currentCardIndex + 1;
+  }
+  var sleep = function(miliseconds) {
+     var currentTime = new Date().getTime();
+     while (currentTime + miliseconds >= new Date().getTime()) {}
   }
 
   speak('hello. what can i do for you?');

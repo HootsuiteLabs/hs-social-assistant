@@ -27,12 +27,3 @@ def get_articles(request):
         response['result'] = {}
         response['message'] = 'Content Source Error.'
         return HttpResponse(json.dumps(response), content_type="application/json");
-
-# def db(request):
-#
-#     greeting = Greeting()
-#     greeting.save()
-#
-#     greetings = Greeting.objects.all()
-#
-#     return render(request, 'db.html', {'greetings': greetings})

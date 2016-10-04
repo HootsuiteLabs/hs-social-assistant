@@ -42,7 +42,7 @@ def get_topics(request):
     # extract the last 10 tweets
     messages = list()
     i = 1
-    for tweet in twitter_response:
+    for tweet in twitter_response.json():
         if (i > 10):
             break
         messages.append(tweet.get('text', ''))

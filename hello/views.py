@@ -13,8 +13,9 @@ def index(request):
 
 def get_articles(request):
 
+    topics = request.GET.get('topics','Marketing,Social_Media')
     url = "https://aras.hootsuite.com/articles"
-    querystring = {"q":"Advocacy,Social"}
+    querystring = {"q": topics}
     response = {}
 
     try:

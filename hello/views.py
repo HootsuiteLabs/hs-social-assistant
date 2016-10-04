@@ -58,11 +58,13 @@ def get_topics(request):
         messages.append(tweet.get('text', ''))
         i = i +1
     print messages
+    topics = list()
     for message in messages:
-        print get_topics_for_tweet(message)
+        topics.extend(get_topics_for_tweet(message))
+    topic = max(set(topics), key=topics.count)
 
     response = {}
-    response['result'] = {'topics': 'cooking'}
+    response['result'] = {'topics': topic}
     response['message'] = ''
     return HttpResponse(json.dumps(response),
                         content_type="application/json");

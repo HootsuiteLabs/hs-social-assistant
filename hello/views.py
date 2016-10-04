@@ -59,7 +59,6 @@ def get_topics(request):
         i = i +1
     print messages
     for message in messages:
-        print 'getting topics for: ' + message
         print get_topics_for_tweet(message)
 
     response = {}

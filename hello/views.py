@@ -28,13 +28,10 @@ def get_articles(request):
     try:
         aras_response = requests.request("GET", url, params=querystring)
         response['result'] = aras_response.json()
-        articles = response['result']['articles']
-        response['result']['articles'] = [article for article in articles if article['image', None] is not None]
         response['message'] = ''
         return HttpResponse(json.dumps(response),
                             content_type="application/json");
-    except Exception, e:
-        print e
+    except:
         response['result'] = {}
         response['message'] = 'Content Source Error.'
         return HttpResponse(json.dumps(response),

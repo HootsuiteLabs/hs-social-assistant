@@ -82,7 +82,7 @@
   });
 
   // set up main vars
-  var recognition, voiceMessage, cards = [], currentCardIndex = 0;
+  var recognition, voiceMessage, cards = [], currentCardIndex = 1;
 
   // set up speech recognition
   if (!('webkitSpeechRecognition' in window)) {
@@ -135,10 +135,11 @@
             });
           }
         });
-      } else if (final_transcript === 'content') {
+      } else if (final_transcript === 'next') {
         nextCard();
       } else if (final_transcript === 'send to compose box') {
         speak('OK');
+        console.log(currentCardIndex);
         var currentCard = cards[currentCardIndex - 1];
         hsp.composeMessage(currentCard.title + " " + currentCard.url, { shortenLinks: true });
         speak('OK. I just put the article in the compose box for you');

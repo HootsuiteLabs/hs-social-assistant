@@ -33,7 +33,8 @@ def get_articles(request):
         response['message'] = ''
         return HttpResponse(json.dumps(response),
                             content_type="application/json");
-    except:
+    except Exception, e:
+        print e
         response['result'] = {}
         response['message'] = 'Content Source Error.'
         return HttpResponse(json.dumps(response),

@@ -40,13 +40,10 @@ def get_articles(request):
 # AI API endpoint
 def get_topics(request):
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-    # querystring = {"screen_name":"mozhacks"}
     querystring = {"screen_name":"invoker"}
     headers = {
         'authorization': "Bearer AAAAAAAAAAAAAAAAAAAAALYVxQAAAAAArsFh33H%2BFhZWl27Tn0vmsgxXBDs%3DzMUgdB9LjfL2JyefZn2GiWkGjmhirPyvkciA4mrX6MjP8eKaPz",
-        'cache-control': "no-cache",
-        'postman-token': "eaca0070-cdd4-7f61-82b1-2f4837b35680"
-        }
+        'cache-control': "no-cache"        }
     twitter_response = requests.request("GET", url,
                                         headers=headers, params=querystring)
 

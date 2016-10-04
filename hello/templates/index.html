@@ -107,7 +107,7 @@
       }
       console.log(final_transcript);
       recognition.stop();
-      if (final_transcript === 'content') {
+      if (final_transcript.indexOf('content') > -1) {
         speak('OK. I will look for some content for you');
         $.getJSON( "articles/", function( data ) {
           if (data.result.articles) {
@@ -135,14 +135,14 @@
             });
           }
         });
-      } else if (final_transcript === 'next') {
+      } else if (final_transcript.indexOf('next') > -1) {
         nextCard();
-      } else if (final_transcript === 'send to compose box') {
+      } else if (final_transcript.indexOf('compose box') > -1) {
         speak('OK');
         console.log(currentCardIndex);
         var currentCard = cards[currentCardIndex - 1];
         hsp.composeMessage(currentCard.title + " " + currentCard.url, { shortenLinks: true });
-        speak('OK. I just put the article in the compose box for you');
+        speak('I just put the article in the compose box for you');
       } else {
         speak('Sorry, I do not understand what you are saying');
       }

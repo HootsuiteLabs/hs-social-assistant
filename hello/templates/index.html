@@ -153,11 +153,13 @@
         speak('OK');
         console.log(currentCardIndex);
         var currentCard = cards[currentCardIndex - 1];
+        sendToComposeBox();
         hsp.composeMessage(currentCard.title + " " + currentCard.url, { shortenLinks: true });
         speak('I just put the article in the compose box for you');
       } else {
         speak('Sorry, I do not understand what you are saying');
       }
+      hideOwl();
     }
     recognition.onerror = function(event) {
       console.log('error during speech recognition!');
@@ -208,6 +210,14 @@
   var sleep = function(miliseconds) {
      var currentTime = new Date().getTime();
      while (currentTime + miliseconds >= new Date().getTime()) {}
+  }
+  var hideOwl = fucntion() {
+    $(".owllisten").removeClass("popup");
+    $("body").removeClass("dark");
+  }
+  var sendToComposeBox = function() {
+    $(".card").stop(true, false).animate({ top: "-=400px", opacity: "0"} );
+    $(".superholder").addClass("supersuccess");
   }
   var getArticles = function(topic) {
     $.getJSON( "articles/?topics=" + topic, function(data) {

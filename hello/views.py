@@ -45,7 +45,7 @@ def get_topics(request):
     for tweet in twitter_response:
         if (i > 10):
             break
-        messages.append(tweet.text)
+        messages.append(tweet.get('text', ''))
         i = i +1
     print messages
 
